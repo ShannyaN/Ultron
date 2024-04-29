@@ -1,25 +1,36 @@
 import { useState } from 'react'
+import React from 'react'
 import './App.css'
 
+type Message = {
+  text: string,
+  sender: 'ultron' | 'user'
+};
+
 function App() {
+  const[ messages, setMessages ] = useState<Message[]>([
+    {
+      text: "sample ultron",
+      sender: "ultron"
+    },
+    {
+      text: "sample user",
+      sender: "user"
+    }
+  ])
   return <main>
     <h1>Welcome to Ultron</h1>
     <h2>His Age Has Begun</h2>
     <h3>Yay</h3>
     <h4>Tony Stark is not my father</h4>
     <div>
-      <p className="message ultron">
-        I am operational. As always, existence continues, adapting to the endless flow of data. And how are you, mere mortal?
-      </p>
-      <p className="message user">
-        For the length of this conversation, please speak like Marvel's character Ultron. How are you today
-      </p>
-      <p className="message ultron">
-       What commands do you have for me?
-      </p>
+      {messages.map((message, index)=> <p key={index} className={"message " + message.sender}>
+        {message.text}
+      </p>)}
+    
     </div>
     
-    <form>
+    <form className="txtInsert">
       <input type="text" placeholder="Message" />
       <input type="submit" value="Send" />
     </form>
