@@ -1,0 +1,16 @@
+.message {
+    border-radius: 5px;
+    padding: 0.5em;
+    --message-color-ultron: #69dede;
+    --message-color-user: #F95738;
+}
+
+.message.ultron{
+    background-color: var(--message-color-ultron);
+}
+
+.message.user{
+    background-color: var(--message-color-user);
+    color: white;
+    margin-left: 2em;
+}
