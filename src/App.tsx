@@ -8,7 +8,8 @@ type Message = {
 };
 
 function App() {
-  const[ messages, setMessages ] = useState<Message[]>([
+  const [ newInputValue, setNewInputValue ] = useState('')
+  const [ messages, setMessages ] = useState<Message[]>([
     {
       text: "sample ultron",
       sender: "ultron"
@@ -18,6 +19,17 @@ function App() {
       sender: "user"
     }
   ])
+
+  const newMessage: React.FormEventHandler = async (e) => {
+    e.preventDefault();
+    setNewInputValue('');
+    const newMessages: Message[] = [...messages, {
+      text: newInputValue,
+      sender: 'user'
+    }];
+    setMessages(newMessages)
+  }
+
   return <main>
     <h1>Welcome to Ultron</h1>
     <h2>His Age Has Begun</h2>
@@ -30,8 +42,12 @@ function App() {
     
     </div>
     
-    <form className="txtInsert">
-      <input type="text" placeholder="Message" />
+    <form className="txtInsert" onSubmit={newMessage}>
+      <input type="text" 
+        placeholder="Message" 
+        value = {newInputValue}
+        onChange={e => setNewInputValue(e.currentTarget.value)}
+        />
       <input type="submit" value="Send" />
     </form>
   </main>
