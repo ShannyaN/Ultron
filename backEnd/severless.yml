@@ -1,4 +1,4 @@
-service: ai-app-backend
+service: ultron-backend
 plugins:
   - serverless-plugin-typescript
 
@@ -7,10 +7,10 @@ useDotenv: true
 provider:
   name: aws
   runtime: nodejs18.x
-  stackName: ai-app-backend
-  region: eu-west-3
+  stackName: ultron-backend
+  region: us-east-1
   versionFunctions: false
-  deploymentBucket: ${env:DEPLOY_BUCKET}
+  deploymentBucket: my-lambda-deployments
   environment:
     OPENAI_KEY: ${env:OPENAI_KEY}
 functions:

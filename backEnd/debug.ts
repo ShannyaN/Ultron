@@ -7,6 +7,6 @@ main({
     body: JSON.stringify({ subject: 'trains' })
 } as APIGatewayEvent, {} as Context)
 .catch(e => {
-    console. error(e);
+    console.error(e);
     debugger;
 })
