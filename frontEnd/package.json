@@ -14,7 +14,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.37",
+    "@types/aws-lambda": "^8.10.137",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.1",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
@@ -22,7 +24,8 @@
     "eslint": "^8.53.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
-    "typescript": "^5.2.2",
+    "serverless-plugin-typescript": "^2.1.5",
+    "typescript": "^5.4.5",
     "vite": "^5.0.0"
   }
 }

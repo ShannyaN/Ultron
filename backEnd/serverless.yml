@@ -7,8 +7,8 @@ useDotenv: true
 provider:
   name: aws
   runtime: nodejs18.x
-  stackName: ai-app-backend
-  region: eu-west-3
+  stackName: ultron-app-backend
+  region: us-east-1
   versionFunctions: false
   deploymentBucket: ${env:DEPLOY_BUCKET}
   environment:    

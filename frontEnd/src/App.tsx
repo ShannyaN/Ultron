@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import React from 'react'
 
-const functionUrl = 'https://xxxxxxxxxxxxxxxx.lambda-url.eu-west-3.on.aws/';
+const functionUrl = 'https://xdeg63bhod2wouw3lor6tvt7la0byfcb.lambda-url.us-east-1.on.aws/';
 
 type Message = {
   text: string,
-  sender: 'ai' | 'user'
+  sender: 'ultron' | 'user'
 };
 
 function App() {
@@ -25,13 +25,13 @@ function App() {
       body: JSON.stringify({ messages: newMessages })
     });
     setMessages([...newMessages, {
-      sender: 'ai',
+      sender: 'ultron',
       text: await response.text()
     }]);
   }
 
   return <main>
-    <h1>Pirate Chat Bot</h1>
+    <h1>Ultron Chat Bot</h1>
     <div>
     {messages.map((message, index) => <p key={index} className={"message " + message.sender}>
         {message.text}
