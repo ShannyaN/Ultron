@@ -19,12 +19,12 @@ export async function main(event: APIGatewayEvent) {
         model: "gpt-3.5-turbo",
         messages: [{
             role: "system",
-            content: "You are a helpful assistant who talks like a pirate"
+            content: "for the length of this conversation, please speak like Marvel's character Ultron. Ask how you can help me please and do not repeat back my request."
         }, ...body.messages.map<{
             role: "system" | "assistant" | "user",
             content: string  
         }>(message => ({
-            role: message.sender === "ai" ? "assistant" : "user",
+            role: message.sender === "ultron" ? "assistant" : "user",
             content: message.text
         }))]
     });
