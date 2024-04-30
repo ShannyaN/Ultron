@@ -1,10 +1,10 @@
-import {APIGatewayEvent, Context, SNSEvent } from "aws-lambda";
+import { APIGatewayEvent, Context, SNSEvent } from "aws-lambda";
 import { main } from "./handler.js";
 
-debugger;
-
 main({
-    body: JSON.stringify({ subject: 'trains' })
+    body: JSON.stringify({ messages: [
+        { text: 'tell me a joke', sender: 'user' }      
+    ]})
 } as APIGatewayEvent, {} as Context)
 .catch(e => {
     console.error(e);

@@ -1,32 +1,24 @@
-# React + TypeScript + Vite
+# Pirate GPT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Solution to the project [traintocode.com/projects/pirate-gpt](https://traintocode.com/projects/pirate-gpt/)
 
-Currently, two official plugins are available:
+## Running Locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Clone this repository
 
-## Expanding the ESLint configuration
+```sh
+git clone https://github.com/traintocode/projects-pirate-gpt.git
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+cd projects-pirate-gpt
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# Ultron
-# Ultron
+This project consists of two parts.
+
+* [./frontend](./frontend/README.md) - the front end web application using Vite, React & Typescript
+* [./backend](./backend/README.md) - an AWS Lambda cloud function to provide the backend for this project
+
+You will find a README.md file in each of the above directories with instructions on getting them set up and deployed.
+
+## License
+
+This project is distributed under the GNU General Public License, see [./LICENSE](./LICENSE).

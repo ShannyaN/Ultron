@@ -1,18 +1,28 @@
 .message {
     border-radius: 5px;
     padding: 0.5em;
-    --message-color-ultron: #d9dede;
+    --message-color-ai: #d9dede;
     --message-color-user: #F95738;
-  }
-  
-  .message.ultron {
-    background-color: var(--message-color-ultron);
-    /* Add a background color using the --message-color-ai */
-  }
-  .message.user {
+}
+
+.message.ai {
+    background-color: var(--message-color-ai);
+}
+
+.message.user {
     background-color: var(--message-color-user);
     color: white;
     margin-left: 2em;
-    /* Add a background color using the --message-color-user */
-  }
-  
+}
+
+.input-form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.input-form input[type='text'] {
+    margin-right: 1rem;
+    flex-grow: 1;
+    line-height: 2;
+}

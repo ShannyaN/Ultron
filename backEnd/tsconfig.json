@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-      "preserveConstEnums": true,
-      "strictNullChecks": true,
-      "sourceMap": true,
-      "allowJs": true,
-      "target": "ESNext",
-      "outDir": ".build",
-      "moduleResolution": "node",
-      "lib": [
-        "ESNext",
-        "dom"
-      ],
-      "rootDir": "./"
-    },
-    "include": [
-      "./**/*.ts"
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "ESNext",
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "lib": [
+      "ESNext",
+      "dom"
     ],
-    "exclude": [
-      "node_modules/**/*"
-    ]
-  }
+    "rootDir": "./"
+  },
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*"
+  ]
+}
