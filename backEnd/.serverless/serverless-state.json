@@ -1,0 +1,227 @@
+{
+  "service": {
+    "service": "ultron-app-backend",
+    "serviceObject": {
+      "name": "ultron-app-backend"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs18.x",
+      "stackName": "ultron-app-backend",
+      "region": "us-east-1",
+      "versionFunctions": false,
+      "deploymentBucket": "ultron-ai-bucket",
+      "environment": {
+        "OPENAI_KEY": "https://2azl3dky6n5y4vw6ggj42b5ffm0qxvxl.lambda-url.us-east-1.on.aws/"
+      },
+      "stage": "dev",
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "CallchatgptLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/ultron-app-backend-prod-callchatgpt"
+            }
+          },
+          "IamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "ultron-app-backend",
+                        "prod",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:CreateLogGroup",
+                          "logs:TagResource"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ultron-app-backend-prod*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ultron-app-backend-prod*:*:*"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "ultron-app-backend",
+                    "prod",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              }
+            }
+          },
+          "CallchatgptLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "ultron-ai-bucket",
+                "S3Key": "serverless/ultron-app-backend/prod/1714508476829-2024-04-30T20:21:16.829Z/ultron-app-backend.zip"
+              },
+              "Handler": "handler.main",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "ultron-app-backend-prod-callchatgpt",
+              "MemorySize": 1024,
+              "Timeout": 120,
+              "Environment": {
+                "Variables": {
+                  "OPENAI_KEY": "https://2azl3dky6n5y4vw6ggj42b5ffm0qxvxl.lambda-url.us-east-1.on.aws/"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CallchatgptLogGroup"
+            ]
+          },
+          "CallchatgptLambdaFunctionUrl": {
+            "Type": "AWS::Lambda::Url",
+            "Properties": {
+              "AuthType": "NONE",
+              "TargetFunctionArn": {
+                "Fn::GetAtt": [
+                  "CallchatgptLambdaFunction",
+                  "Arn"
+                ]
+              }
+            }
+          },
+          "CallchatgptLambdaPermissionFnUrl": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CallchatgptLambdaFunctionUrl\"][\"Properties\"][\"TargetFunctionArn\"]"
+              },
+              "Action": "lambda:InvokeFunctionUrl",
+              "Principal": "*",
+              "FunctionUrlAuthType": "NONE"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "ultron-ai-bucket",
+            "Export": {
+              "Name": "sls-ultron-app-backend-prod-ServerlessDeploymentBucketName"
+            }
+          },
+          "CallchatgptLambdaFunctionUrl": {
+            "Description": "Lambda Function URL",
+            "Value": {
+              "Fn::GetAtt": [
+                "CallchatgptLambdaFunctionUrl",
+                "FunctionUrl"
+              ]
+            },
+            "Export": {
+              "Name": "sls-ultron-app-backend-prod-CallchatgptLambdaFunctionUrl"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "plugins": [
+      "serverless-plugin-typescript"
+    ],
+    "pluginsData": {},
+    "functions": {
+      "callchatgpt": {
+        "handler": "handler.main",
+        "url": true,
+        "timeout": 120,
+        "events": [],
+        "name": "ultron-app-backend-prod-callchatgpt",
+        "package": {
+          "exclude": [
+            "node_modules/serverless-plugin-typescript"
+          ],
+          "include": [],
+          "patterns": []
+        },
+        "memory": 1024,
+        "runtime": "nodejs18.x",
+        "vpc": {}
+      }
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless.yml",
+    "initialServerlessConfig": {
+      "service": "ultron-app-backend",
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "useDotenv": true,
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "functions": {
+        "$ref": "$[\"service\"][\"functions\"]"
+      }
+    },
+    "layers": {},
+    "isDashboardMonitoringPreconfigured": false,
+    "artifact": "/Users/shaymless658/Desktop/Cornell/Spring 24/ENGMT_AI/Ultron/backend/.build/.serverless/ultron-app-backend.zip"
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/ultron-app-backend/prod/1714508476829-2024-04-30T20:21:16.829Z",
+    "artifact": "ultron-app-backend.zip"
+  }
+}
